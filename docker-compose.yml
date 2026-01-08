@@ -1,0 +1,38 @@
+services:
+  # Backend Flask
+  backend:
+    build: ./backend_clubes
+    container_name: flask_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - DB_HOST=db              # ← AGREGA ESTO
+      - DB_USER=user            # ← AGREGA ESTO
+      - DB_PASSWORD=password    # ← AGREGA ESTO
+      - DB_NAME=club_database   # ← AGREGA ESTO
+    depends_on:
+      - db
+
+  # Frontend React + Vite
+  frontend:
+    build: ./frontend_clubes
+    container_name: react_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  # Base de datos PostgreSQL
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: club_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data

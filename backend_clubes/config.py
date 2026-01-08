@@ -4,9 +4,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
+    # Usa DB_HOST para permitir cambiar entre localhost (dev) y db (docker)
+    DB_HOST = os.getenv("DB_HOST", "localhost")
+    DB_USER = os.getenv("DB_USER", "user")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
+    DB_NAME = os.getenv("DB_NAME", "club_database")
+    
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL",
-        "postgresql+psycopg2://postgres:Adilion2002_@localhost:5432/proyecto_clubes"
+        f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:5432/{DB_NAME}"
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
