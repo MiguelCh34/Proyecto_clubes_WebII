@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
+from ..utils.decorators import admin_required
 from .. import db
 from ..database.models import Club, Sede, Facultad, Estado, Usuario
 
@@ -49,12 +50,18 @@ def listar_detalles_club():
 
 @club_bp.post("/crear_club")
 @jwt_required()
+@admin_required
 def crear_club():
     data = request.get_json()
     nuevo_club = Club(**data)
     db.session.add(nuevo_club)
     db.session.commit()
-    return jsonify({"message": "Club creado exitosamente"}), 201
+    
+    # ✅ CAMBIO: Devolver el ID del club creado
+    return jsonify({
+        "message": "Club creado exitosamente",
+        "ID_Club": nuevo_club.ID_Club
+    }), 201
 
 
 @club_bp.get("/obtener_club/<int:id>")
@@ -78,6 +85,7 @@ def obtener_club(id):
 
 @club_bp.put("/actualizar_club/<int:id>")
 @jwt_required()
+@admin_required
 def actualizar_club(id):
     club = Club.query.get(id)
     if not club:
@@ -93,6 +101,7 @@ def actualizar_club(id):
 
 @club_bp.delete("/eliminar_club/<int:id>")
 @jwt_required()
+@admin_required
 def eliminar_club(id):
     club = Club.query.get(id)
     if not club:

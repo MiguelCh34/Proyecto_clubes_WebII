@@ -4,10 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/imagenes/Uleam.jpg');
-  background-size: cover;
+  background-image: url('/imagenes/Gemini_Generated_Image_tva2p9tva2p9tva2.png');
+  background-size: 60% auto;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #79a7c8;
   padding: 20px;
   position: relative;
   overflow: hidden;

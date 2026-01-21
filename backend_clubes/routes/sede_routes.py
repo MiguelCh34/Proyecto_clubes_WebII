@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-
+from ..utils.decorators import admin_required
 # Import correcto dentro del paquete
 from .. import db
 from ..database.models import Sede
@@ -27,6 +27,7 @@ def listar_sedes():
 # ================================
 @sede_bp.post("/crear_sede")
 @jwt_required()
+@admin_required
 def crear_sede():
     data = request.get_json() or {}
     ubicacion = data.get("Ubicacion")
@@ -67,6 +68,7 @@ def obtener_sede(id):
 # ================================
 @sede_bp.put("/actualizar_sede/<int:id>")
 @jwt_required()
+@admin_required
 def actualizar_sede(id):
     s = Sede.query.get_or_404(id)
     data = request.get_json() or {}
@@ -83,6 +85,7 @@ def actualizar_sede(id):
 # ================================
 @sede_bp.delete("/eliminar_sede/<int:id>")
 @jwt_required()
+@admin_required
 def eliminar_sede(id):
     s = Sede.query.get_or_404(id)
     db.session.delete(s)

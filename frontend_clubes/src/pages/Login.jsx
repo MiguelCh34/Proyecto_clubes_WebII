@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";  // ← AGREGAR
 import "./Login.css";
 
 export default function Login() {
@@ -9,6 +10,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();  // ← AGREGAR
 
   const handleLogin = async () => {
     console.log("📌 Intentando iniciar sesión con:", email, password);
@@ -36,9 +38,19 @@ export default function Login() {
       console.log("📌 Datos recibidos:", data);
 
       if (response.ok) {
-        localStorage.setItem("access_token", data.access_token);
-        console.log("✅ Login exitoso, redirigiendo al dashboard...");
-        navigate("/dashboard");
+        // ← CAMBIO: Usar el método login del contexto
+        login(data);
+        
+        console.log("✅ Login exitoso, rol:", data.usuario.rol);
+        
+        // ← CAMBIO: Redirigir según el rol
+        if (data.usuario.rol === 'admin') {
+          console.log("🔑 Usuario admin, redirigiendo al dashboard...");
+          navigate("/dashboard");
+        } else {
+          console.log("👤 Usuario normal, redirigiendo a clubes...");
+          navigate("/clubes");
+        }
       } else {
         setError(data.error || "Credenciales incorrectas");
       }

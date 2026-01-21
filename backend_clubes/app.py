@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from flask_cors import CORS  # 👈 IMPORTANTE
+from flask_cors import CORS
 
 from . import db  
 from .config import Config
@@ -13,8 +13,10 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # 👇 HABILITAR CORS PARA TODO
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    # ========================================
+    # CONFIGURACIÓN CORS MÁS PERMISIVA
+    # ========================================
+    CORS(app)  # Esto permite todo temporalmente
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -45,11 +47,11 @@ def create_app():
     app.register_blueprint(inscripcion_bp, url_prefix="/inscripcion")
     app.register_blueprint(participacion_bp, url_prefix="/participacion")
     app.register_blueprint(persona_bp, url_prefix="/persona")
-    app.register_blueprint(roles_bp, url_prefix="/roles")
+    app.register_blueprint(roles_bp, url_prefix="/rol")
     app.register_blueprint(sede_bp, url_prefix="/sede")
 
     return app
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

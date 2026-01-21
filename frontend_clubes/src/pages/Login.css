@@ -10,16 +10,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Imagen de fondo - Cambia la URL por tu imagen */
-  background-image: url('/imagenes/Uleam.jpg');
-  background-size: cover;
+  background-image: url('/imagenes/Gemini_Generated_Image_tva2p9tva2p9tva2.png');
+  background-size: 60% auto;      /* ← CAMBIA A ESTO: 100% en lugar de 120% */
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #79a7c8;
   padding: 20px;
   position: relative;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
 }
+
 
 /* Overlay oscuro sobre la imagen para mejor contraste */
 .login-container-modern::before {

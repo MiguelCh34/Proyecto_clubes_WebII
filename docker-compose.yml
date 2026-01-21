@@ -8,10 +8,10 @@ services:
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=development
-      - DB_HOST=db              # ← AGREGA ESTO
-      - DB_USER=user            # ← AGREGA ESTO
-      - DB_PASSWORD=password    # ← AGREGA ESTO
-      - DB_NAME=club_database   # ← AGREGA ESTO
+      - DB_HOST=db              
+      - DB_USER=user            
+      - DB_PASSWORD=password    
+      - DB_NAME=club_database   
     depends_on:
       - db
 
