@@ -1,16 +1,13 @@
 # backend_clubes/routes/usuario_routes.py
 from flask import Blueprint, request, jsonify
-from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from utils.decorators import admin_required  # ← Cambiado
-from database.models import db, Usuario  # ← Cambiado
-from services.usuario_service import (  # ← Cambiado
+from utils.decorators import admin_required
+from database.models import db, Usuario
+from services.usuario_service import (
     listar_usuarios as svc_listar,
     obtener_usuario as svc_obtener,
     actualizar_usuario as svc_actualizar,
 )
-
-from .. import db
 
 usuario_bp = Blueprint("usuario_bp", __name__)
 
