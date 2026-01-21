@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from ..utils.decorators import admin_required
-from .. import db
-from ..database.models import Categoria
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
+from utils.decorators import admin_required  # ← Cambiado
+from database.models import db, Categoria  # ← Cambiado
 
 categoria_bp = Blueprint("categoria_bp", __name__)
 

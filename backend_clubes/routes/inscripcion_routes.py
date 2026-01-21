@@ -1,10 +1,11 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from datetime import datetime
-from ..utils.decorators import admin_required
-# Importaciones corregidas para estructura de paquete
-from .. import db
-from ..database.models import Inscripcion, Persona, Club, Roles, Estado, Usuario
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from datetime import datetime
+from utils.decorators import admin_required  # ← Cambiado
+from database.models import db, Inscripcion, Persona, Club, Roles, Estado, Usuario  # ← Cambiado
 
 inscripcion_bp = Blueprint("inscripcion_bp", __name__)
 

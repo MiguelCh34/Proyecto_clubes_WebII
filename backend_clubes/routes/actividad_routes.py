@@ -1,10 +1,10 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from ..utils.decorators import admin_required
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
+from utils.decorators import admin_required  # ← Cambiado
 from datetime import datetime
-
-# 👇 Importaciones correctas dentro del paquete
-from .. import db
+from database.models import db, Actividad, Club, Estado, Usuario  # ← Cambiado
 from ..database.models import Actividad, Club, Estado, Usuario
 
 

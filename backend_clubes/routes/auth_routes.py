@@ -6,10 +6,9 @@ from flask_jwt_extended import (
     get_jwt_identity
 )
 from werkzeug.security import generate_password_hash, check_password_hash
-from ..utils.decorators import admin_required
+from utils.decorators import admin_required  # ← Cambiado
 
-from .. import db
-from ..database.models import Usuario
+from database.models import db, Usuario  # ← Cambiado
 
 auth_bp = Blueprint("auth_bp", __name__)
 
@@ -209,4 +208,3 @@ def eliminar_usuario(id):
     db.session.commit()
 
     return jsonify({"message": "Usuario eliminado correctamente"}), 200
-

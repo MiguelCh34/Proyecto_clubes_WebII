@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from ..utils.decorators import admin_required
-# Import correcto dentro del paquete
-from .. import db
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
+from utils.decorators import admin_required  # ← Cambiado
+from database.models import db, Facultad  # ← Cambiado
 from ..database.models import Facultad
 
 facultad_bp = Blueprint("facultad_bp", __name__)
