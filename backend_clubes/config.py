@@ -67,7 +67,21 @@ def get_database_uri():
 
 class Config:
     # Base de datos con detección automática
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL") or get_database_uri()
+    # IMPORTANTE: Corregir formato de Neon para SQLAlchemy
+    database_url = os.getenv("DATABASE_URL")
+    
+    if database_url:
+        # Si la URL viene de Neon y empieza con postgres://, cambiarla a postgresql://
+        if database_url.startswith('postgres://'):
+            database_url = database_url.replace('postgres://', 'postgresql://', 1)
+        # Si la URL no tiene el driver psycopg2, agregarlo
+        if 'postgresql://' in database_url and 'postgresql+psycopg2://' not in database_url:
+            database_url = database_url.replace('postgresql://', 'postgresql+psycopg2://', 1)
+        SQLALCHEMY_DATABASE_URI = database_url
+    else:
+        # Fallback a detección automática local
+        SQLALCHEMY_DATABASE_URI = get_database_uri()
+    
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Seguridad JWT
