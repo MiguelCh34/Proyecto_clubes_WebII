@@ -1,12 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
-from utils.decorators import admin_required  # ← Cambiado
+from utils.decorators import admin_required
 from datetime import datetime
-from database.models import db, Actividad, Club, Estado, Usuario  # ← Cambiado
-from ..database.models import Actividad, Club, Estado, Usuario
-
+from database.models import db, Actividad, Club, Estado, Usuario
 
 actividad_bp = Blueprint("actividad_bp", __name__)
 

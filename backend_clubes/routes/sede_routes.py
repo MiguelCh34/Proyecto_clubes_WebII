@@ -4,7 +4,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from utils.decorators import admin_required  # ← Cambiado
 from database.models import db, Sede  # ← Cambiado
-from ..database.models import Sede
+
 
 
 sede_bp = Blueprint("sede_bp", __name__)

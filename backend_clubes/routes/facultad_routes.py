@@ -1,10 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
-from utils.decorators import admin_required  # ← Cambiado
-from database.models import db, Facultad  # ← Cambiado
-from ..database.models import Facultad
+from utils.decorators import admin_required
+from database.models import db, Facultad
 
 facultad_bp = Blueprint("facultad_bp", __name__)
 
